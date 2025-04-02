@@ -48,18 +48,68 @@
         }
 
         function paparkanData(data) {
-            let htmlContent = `<table><tr>`;
-            // papar header
-            header.forEach(col => htmlContent += `<th>${col}</th>`);
-            htmlContent += `</tr>`;
+        let htmlContent = `<table>
+                            <tr>
+                                <th>Tahun</th>
+                                <th>Bulan</th>
+                                <th>Bil.</th>
+                                <th>R/N</th>
+                                <th>Nama</th>
+                                <th>No. Kad Pengenalan</th>
+                                <th>Warganegara</th>
+                                <th>Bangsa</th>
+                                <th>Jantina</th>
+                                <th>Umur</th>
+                                <th>Kumpulan Umur</th>
+                                <th>Mahkamah</th>
+                                <th>Tempat</th>
+                                <th>Negeri</th>
+                                <th>Daerah (Johor)</th>
+                                <th>No. Kes</th>
+                                <th>Akta</th>
+                                <th>Tuduhan</th>
+                                <th>Kategori Tuduhan</th>
+                                <th>Keterangan Pertuduhan</th>
+                                <th>Tahanan Seksyen</th>
+                                <th>Laporan Psikiatri Siap</th>
+                                <th>Tarikh Discaj</th>                                  
+                            </tr>`;
 
             if(data.length === 0){
                 htmlContent +="<tr><td colspan='"+header.length+"'>Tiada data ditemui.</td></tr>";
             } else {
                 data.forEach(row => {
-                    htmlContent += `<tr>`;
-                    row.forEach(cell => htmlContent += `<td>${cell}</td>`);
-                    htmlContent += `</tr>`;
+                htmlContent += `<tr>
+                    <td>${row[0]}</td>
+                    <td>${row[1]}</td>
+                    <td>${row[2]}</td>
+                    <td>${row[3]}</td>
+                    <td>${row[4]}</td>
+                    <td>${row[5]}</td>
+                    <td>${row[6]}</td>
+                    <td>${row[7]}</td>
+                    <td>${row[8]}</td>
+                    <td>${row[9]}</td>
+                    <td>${row[10]}</td>
+                    <td>${row[11]}</td>
+                    <td>${row[12]}</td>
+                    <td>${row[13]}</td>
+                    <td>${row[14]}</td>
+                    <td>${row[15]}</td>
+                    <td>${row[16]}</td>
+                    <td>${row[17]}</td>
+                    <td>${row[18]}</td>
+                    <td>${row[19]}</td>
+                    <td>${row[20]}</td>
+                    <td>${row[21]}</td>
+                    <td>${row[30]}</td>
+                    <td>${row[31]}</td>
+                    <td>${row[32]}</td>
+                    <td>${row[33]}</td>
+                    <td>${row[34]}</td>
+                    <td>${row[35]}</td>
+                    <td>${row[36]}</td>            
+                </tr>`;
                 });
             }
             htmlContent += "</table>";
