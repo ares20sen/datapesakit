@@ -1,1 +1,76 @@
 # datapesakit
+resp_67ecc58bd5948191bde2e002cd66019d0a3dc57ac63582a0
+
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <title>Cari Data dari Google Sheets</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        input { padding: 8px; font-size: 16px; }
+        button { padding: 8px 12px; font-size: 16px; cursor: pointer;}
+        table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <h2>Cari Data</h2>
+
+    <input type="text" id="carian" placeholder="Masukkan Nama/Alamat/Telefon">
+    <button onclick="cariData()">Cari</button>
+
+    <div id="hasil"></div>
+
+    <script>
+        let spreadsheetURL = "TAMBAHKAN_URL_CSV_DI_SINI"; // gantikan dengan URL CSV anda
+        let sheetData = [];
+
+        async function fetchData() {
+            let response = await fetch(spreadsheetURL);
+            let dataText = await response.text();
+            let rows = dataText.trim().split("\n");
+            rows.forEach((row, index) => {
+                if(index !== 0) { // skip header
+                    sheetData.push(row.split(","));
+                }
+            });
+        }
+
+        function cariData() {
+            let query = document.getElementById("carian").value.toLowerCase();
+            let hasil = sheetData.filter(row => row.some(cell => cell.toLowerCase().includes(query)));
+            paparkanData(hasil);
+        }
+
+        function paparkanData(data) {
+            let htmlContent = `<table>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nama</th>
+                                    <th>Alamat</th>
+                                    <th>Telefon</th>
+                                </tr>`;
+
+            if(data.length == 0){
+                htmlContent +="<tr><td colspan='4'>Tiada data ditemui.</td></tr>";
+            } else{
+                data.forEach(row => {
+                    htmlContent += `<tr>
+                        <td>${row[0]}</td>
+                        <td>${row[1]}</td>
+                        <td>${row[2]}</td>
+                        <td>${row[3]}</td>
+                    </tr>`;
+                });
+            }
+            htmlContent += "</table>";
+            document.getElementById("hasil").innerHTML = htmlContent;
+        }
+
+        // Muatan awal data dari Google Sheets semasa laman dibuka.
+        fetchData();
+    </script>
+</body>
+</html>
