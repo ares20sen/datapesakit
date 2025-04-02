@@ -16,32 +16,6 @@
     <h2>Carian Data Pesakit</h2>
 
     <input type="text" id="carian" placeholder="Masukkan Nama / R/N / No. Kad Pengenalan">
-    
-    <select id="bulan">
-    <option value="">-- SEMUA BULAN --</option>
-    <option value="01">JAN</option>
-    <option value="02">FEB</option>
-    <option value="03">MAC</option>
-    <option value="04">APR</option>
-    <option value="05">MEI</option>
-    <option value="06">JUN</option>
-    <option value="07">JUL</option>
-    <option value="08">OGOS</option>
-    <option value="09">SEP</option>
-    <option value="10">OKT</option>
-    <option value="11">NOV</option>
-    <option value="12">DIS</option>
-    </select>
-
-    <select id="tahun">
-    <option value="">-- SEMUA TAHUN --</option>
-    <option value="2021">2024</option>
-    <option value="2022">2025</option>
-    <option value="2023">2026</option>
-    <option value="2024">2027</option>
-    <option value="2025">2028</option>
-    </select>
-    
     <button onclick="cariData()">Cari</button>
 
     <div id="hasil"></div>
@@ -63,17 +37,6 @@
 
         function cariData() {
             let query = document.getElementById("carian").value.toLowerCase();
-            let bulan = document.getElementById("bulan").value;
-            let bulan = document.getElementById("tahun").value;
-                
-            let hasil = sheetData.filter(row => row.some(cell => cell.toLowerCase().includes(query)));
-            let padanTeks = row[jenis].toLowerCase().includes(queryTeks);
-            let padanBulan = !bulan || tarikh.split("-")[1] === bulan;
-            let padanTahun = !tahun || tarikh.split("-")[0] === tahun;
-
-            return padanTeks && padanBulan && padanTahun;
-        });
-            
             paparkanData(hasil);
         }
 
