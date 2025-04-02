@@ -16,6 +16,9 @@
     <h2>Carian Data Pesakit</h2>
 
     <input type="text" id="carian" placeholder="Masukkan Nama / R/N / No. Kad Pengenalan">
+    <input type="text" id="tahun" placeholder="Tahun (Contoh: 2025)">
+    <input type="text" id="bulan" placeholder="Bulan (Contoh: JAN)">
+    <input type="text" id="kes_pertuduhan" placeholder="Kes Pertuduhan">
     <button onclick="cariData()">Cari</button>
 
     <div id="hasil"></div>
@@ -39,9 +42,19 @@
 
         function cariData() {
             let query = document.getElementById("carian").value.toLowerCase().trim();
+            let queryTahun = document.getElementById("tahun").value.toLowerCase().trim();
+            let queryBulan = document.getElementById("bulan").value.toLowerCase().trim();
+            let queryKes = document.getElementById("kes_pertuduhan").value.toLowerCase().trim();
+
 
             let hasilCarian = sheetData.filter(row =>
                 row.some(col => col.toLowerCase().includes(query))
+                let matchNama = !queryNama || row.some(col => col.toLowerCase().includes(queryNama));
+                let matchTahun = !queryTahun || row[0].toLowerCase().includes(queryTahun); // Tahun di indeks 0
+                let matchBulan = !queryBulan || row[1].toLowerCase().includes(queryBulan); // Bulan di indeks 1
+                let matchKes = !queryKes || row[17].toLowerCase().includes(queryKes); // Tuduhan/Kes di indeks 18
+
+                return matchNama && matchTahun && matchBulan && matchKes;
             );
 
             paparkanData(hasilCarian);
