@@ -67,7 +67,13 @@
             let bulan = document.getElementById("tahun").value;
                 
             let hasil = sheetData.filter(row => row.some(cell => cell.toLowerCase().includes(query)));
-            
+            let padanTeks = row[jenis].toLowerCase().includes(queryTeks);
+            let tarikh = row[4]; // kolum ke-4 indeksnya Tarikh (YYYY-MM-DD)
+            let padanBulan = !bulan || tarikh.split("-")[1] === bulan;
+            let padanTahun = !tahun || tarikh.split("-")[0] === tahun;
+
+            return padanTeks && padanBulan && padanTahun;
+        });
             
             paparkanData(hasil);
         }
